@@ -1,12 +1,13 @@
 package com.dummycook.recipeservice.entities;
 
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Embeddable
-public class RecipeIngredientId {
+public class RecipeIngredientId implements Serializable {
+    @Column(nullable = false)
+    private Long serialId;
+
     @ManyToOne
     @JoinColumn(name = "ingredient_fk")
     private Ingredient ingredient;
@@ -18,17 +19,6 @@ public class RecipeIngredientId {
     @ManyToOne
     @JoinColumn(name = "unity_of_measure_fk")
     private UnityOfMeasure unityOfMeasure;
-
-    @Embedded
-    private RecipeIngredientId recipeIngredientId;
-
-    public RecipeIngredientId getRecipeIngredientId() {
-        return recipeIngredientId;
-    }
-
-    public void setRecipeIngredientId(RecipeIngredientId recipeIngredientId) {
-        this.recipeIngredientId = recipeIngredientId;
-    }
 
     public UnityOfMeasure getUnityOfMeasure() {
         return unityOfMeasure;
