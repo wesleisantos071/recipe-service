@@ -60,7 +60,7 @@ INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	28	,'D
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	29	,'Mayonnaise',	FALSE	,	TRUE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	30	,'Vanilla extract',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	31	,'Spinach',	FALSE	,	FALSE	);
-INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	32	,'Pasta',	FALSE	,	FALSE	);
+INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	32	,'Spaghetti',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	33	,'Rice',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	34	,'Lentils',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	35	,'Onions',	FALSE	,	FALSE	);
