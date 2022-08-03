@@ -2,9 +2,9 @@ package com.dummycook.recipeservice.entities;
 
 import javax.persistence.*;
 
-@Table(name = "unity_of_measure")
+@Table(name = "type_of_unity")
 @Entity
-public class UnityOfMeasure {
+public class TypeOfUnity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -12,18 +12,6 @@ public class UnityOfMeasure {
 
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "type_of_unity_id", nullable = false)
-    private TypeOfUnity typeOfUnity;
-
-    public TypeOfUnity getTypeOfUnity() {
-        return typeOfUnity;
-    }
-
-    public void setTypeOfUnity(TypeOfUnity typeOfUnity) {
-        this.typeOfUnity = typeOfUnity;
-    }
 
     public String getName() {
         return name;

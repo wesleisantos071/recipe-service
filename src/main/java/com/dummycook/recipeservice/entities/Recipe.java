@@ -14,15 +14,26 @@ public class Recipe {
     private String name;
 
     @Lob
-    @Column(name = "text")
-    private String text;
+    @Column(name = "instructions")
+    private String instructions;
 
-    public String getText() {
-        return text;
+    @Column(name = "number_of_servings", nullable = false)
+    private Integer number_of_servings;
+
+    public Integer getNumber_of_servings() {
+        return number_of_servings;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setNumber_of_servings(Integer number_of_servings) {
+        this.number_of_servings = number_of_servings;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
     public String getName() {
