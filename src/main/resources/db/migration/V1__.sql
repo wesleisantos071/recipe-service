@@ -16,16 +16,10 @@ CREATE TABLE recipe (
 
 CREATE TABLE recipe_ingredient (
   amount DOUBLE PRECISION NOT NULL,
-  serial_id BIGINT NOT NULL,
+  unity_of_measure_fk BIGINT NOT NULL,
   ingredient_fk BIGINT NOT NULL,
   recipe_fk BIGINT NOT NULL,
-  unity_of_measure_fk BIGINT NOT NULL,
-  CONSTRAINT pk_recipe_ingredient PRIMARY KEY (
-    serial_id,
-    ingredient_fk,
-    recipe_fk,
-    unity_of_measure_fk
-  )
+  CONSTRAINT pk_recipe_ingredient PRIMARY KEY (ingredient_fk, recipe_fk)
 );
 
 CREATE TABLE type_of_unity (

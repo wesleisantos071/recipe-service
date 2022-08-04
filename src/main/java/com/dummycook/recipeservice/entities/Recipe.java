@@ -2,7 +2,9 @@ package com.dummycook.recipeservice.entities;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Table(name = "recipe")
 @Entity
@@ -22,14 +24,15 @@ public class Recipe {
     @Column(name = "number_of_servings", nullable = false)
     private Integer number_of_servings;
 
-    @OneToMany(mappedBy = "recipe", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<RecipeIngredient> recipeIngredients = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "recipe_fk")
+    private Set<RecipeIngredient> recipeIngredients = new HashSet<>(0);
 
-    public List<RecipeIngredient> getRecipeIngredients() {
+    public Set<RecipeIngredient> getRecipeIngredients() {
         return recipeIngredients;
     }
 
-    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+    public void setRecipeIngredients(Set<RecipeIngredient> recipeIngredients) {
         this.recipeIngredients = recipeIngredients;
     }
 

@@ -1,6 +1,7 @@
 package com.dummycook.recipeservice.entities;
 
-import net.minidev.json.annotate.JsonIgnore;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -14,28 +15,16 @@ public class RecipeIngredient {
     @Column(name = "amount", nullable = false)
     private Double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "recipe_fk", insertable = false, updatable = false)
-    private Recipe recipe;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "unity_of_measure_fk", nullable = false)
+    private UnityOfMeasure unityOfMeasure;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "ingredient_fk", insertable = false, updatable = false)
-    private Ingredient ingredient;
-
-    public Ingredient getIngredient() {
-        return ingredient;
+    public UnityOfMeasure getUnityOfMeasure() {
+        return unityOfMeasure;
     }
 
-    public void setIngredient(Ingredient ingredient) {
-        this.ingredient = ingredient;
-    }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
+    public void setUnityOfMeasure(UnityOfMeasure unityOfMeasure) {
+        this.unityOfMeasure = unityOfMeasure;
     }
 
     public Double getAmount() {
