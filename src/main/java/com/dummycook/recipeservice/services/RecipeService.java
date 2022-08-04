@@ -25,17 +25,24 @@ public class RecipeService {
         return recipeRepository.findAll();
     }
 
-    public List<Recipe> listVegetarianRecipes(List<Ingredient> ingredients) {
+    public List<Recipe> listVegetarianRecipes(List<Long> ingredientIdList) {
         List<Recipe> allRecipes = recipeRepository.findAll();
         return allRecipes.stream()
                 .filter(recipe -> !recipe.getRecipeIngredients().isEmpty())
                 .filter(recipe -> recipeIngredientsAreVegetarian(recipe))
+                .filter(recipe -> containsIngredients(recipe, ingredientIdList))
                 .collect(Collectors.toList());
     }
 
     private boolean recipeIngredientsAreVegetarian(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
                 .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
+    }
+
+    private boolean containsIngredients(Recipe recipe, List<Long> ingredientIdList) {
+        return ingredientIdList == null ? true : ingredientIdList.stream()
+                .allMatch(requiredIngredientId -> recipe.getRecipeIngredients().stream()
+                        .anyMatch(recipeIngredient -> recipeIngredient.getRecipeIngredientId().getIngredient().getId() == requiredIngredientId));
     }
 
     @Transactional

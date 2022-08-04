@@ -22,10 +22,10 @@ public class RecipeFilterController {
 
     @GetMapping("/listVegetarianRecipes")
     @ApiOperation(value="Finds all recipes that are vegetarian",
-    notes = "It is also possible to specify a list of ingredients that must be part of the recipe, but ingredients non vegetarian wont take any effect on the expected result of this API",
+    notes = "It is also possible to specify a list of ingredients that must be part of the recipe",
     response = List.class)
-    public List<Recipe> listVegetarianRecipes(@RequestBody List<Ingredient> ingredients){
-        return recipeService.listVegetarianRecipes(ingredients);
+    public List<Recipe> listVegetarianRecipes(@RequestParam(required = false) List<Long> ingredientIdList){
+        return recipeService.listVegetarianRecipes(ingredientIdList);
     }
 
     @PostMapping("/saveRecipe")
