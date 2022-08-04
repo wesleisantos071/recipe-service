@@ -1,6 +1,5 @@
 package com.dummycook.recipeservice.services;
 
-import com.dummycook.recipeservice.entities.Ingredient;
 import com.dummycook.recipeservice.entities.Recipe;
 import com.dummycook.recipeservice.entities.RecipeIngredient;
 import com.dummycook.recipeservice.repositories.RecipeIngredientRepository;
@@ -29,12 +28,12 @@ public class RecipeService {
         List<Recipe> allRecipes = recipeRepository.findAll();
         return allRecipes.stream()
                 .filter(recipe -> !recipe.getRecipeIngredients().isEmpty())
-                .filter(recipe -> recipeIngredientsAreVegetarian(recipe))
+                .filter(recipe -> areRecipeIngredientsVegetarian(recipe))
                 .filter(recipe -> containsIngredients(recipe, ingredientIdList))
                 .collect(Collectors.toList());
     }
 
-    private boolean recipeIngredientsAreVegetarian(Recipe recipe) {
+    private boolean areRecipeIngredientsVegetarian(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
                 .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
     }

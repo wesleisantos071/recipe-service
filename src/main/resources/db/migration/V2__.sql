@@ -1,3 +1,4 @@
+INSERT INTO type_of_unity (id, name) VALUES (0, 'Unknown');
 INSERT INTO type_of_unity (id, name) VALUES (1, 'Volume');
 INSERT INTO type_of_unity (id, name) VALUES (2, 'Weight');
 INSERT INTO type_of_unity (id, name) VALUES (3, 'Lenght');
