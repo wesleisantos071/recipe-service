@@ -2,6 +2,7 @@ INSERT INTO type_of_unity (id, name) VALUES (0, 'Unknown');
 INSERT INTO type_of_unity (id, name) VALUES (1, 'Volume');
 INSERT INTO type_of_unity (id, name) VALUES (2, 'Weight');
 INSERT INTO type_of_unity (id, name) VALUES (3, 'Lenght');
+INSERT INTO type_of_unity (id, name) VALUES (4, 'Quantity');
 
 --UOM volume
 INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (1, 'ml',		1);
@@ -26,6 +27,8 @@ INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (18, 'mm',		3);
 INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (19, 'cm',		3);
 INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (20, 'm',		3);
 INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (21, 'inch',	3);
+--Quantity
+INSERT INTO unity_of_measure (id, name, type_of_unity_id) VALUES (22, 'cloves',	4);
 
 
 
@@ -85,4 +88,5 @@ INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	52	,'O
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	53	,'Banana',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	54	,'Avocado',	FALSE	,	FALSE	);
 INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	55	,'Vanilla stick',	FALSE	,	FALSE	);
+INSERT INTO ingredient (id, name, is_meat, is_animal_originated) VALUES (	56	,'Salmon',	TRUE	,	TRUE	);
 

@@ -30,6 +30,7 @@ public class RecipeService {
 
     public List<Recipe> filter(Boolean isVegetarianFilter,
                                Boolean isVeganFilter,
+                               Integer numberOfServing,
                                String instructionKeywordFilter,
                                List<String> includesIngredientNameListFilter,
                                List<String> excludesIngredientNameListFilter) {
@@ -37,13 +38,32 @@ public class RecipeService {
         return allRecipes.stream()
                 .filter(recipe -> !recipe.getRecipeIngredients().isEmpty())
                 .filter(recipe -> isVegetarianFilter != null ? areRecipeIngredientsVegetarian(recipe) : true)
+                .filter(recipe -> isVeganFilter != null ? areRecipeIngredientsVegan(recipe) : true)
+                .filter(recipe -> numberOfServing != null ? recipeMatchesNumberOfServing(recipe, numberOfServing) : true)
+                .filter(recipe -> instructionKeywordFilter != null ? recipeMatchesInstructionKeyWord(recipe, instructionKeywordFilter) : true)
                 .filter(recipe -> includesIngredientNameListFilter != null ? containsIngredients(recipe, includesIngredientNameListFilter) : true)
+                .filter(recipe -> excludesIngredientNameListFilter != null ? doesNotContainIngredients(recipe, excludesIngredientNameListFilter) : true)
                 .collect(Collectors.toList());
+    }
+
+    private boolean recipeMatchesInstructionKeyWord(Recipe recipe, String instructionKeywordFilter) {
+        return recipe.getInstructions().toLowerCase().contains(instructionKeywordFilter.toLowerCase());
+    }
+
+    private boolean recipeMatchesNumberOfServing(Recipe recipe, Integer numberOfServing) {
+        return recipe.getNumber_of_servings() == numberOfServing;
     }
 
     private boolean areRecipeIngredientsVegetarian(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
                 .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
+    }
+
+    private boolean areRecipeIngredientsVegan(Recipe recipe) {
+        return recipe.getRecipeIngredients().stream()
+                .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat()
+                        & !recipeIngredient.getRecipeIngredientId().getIngredient().getIsAnimalOriginated()
+                );
     }
 
     private boolean containsIngredients(Recipe recipe, List<String> includingIngredientNameList) {

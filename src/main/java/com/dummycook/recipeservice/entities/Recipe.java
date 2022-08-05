@@ -1,9 +1,7 @@
 package com.dummycook.recipeservice.entities;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Table(name = "recipe")
@@ -24,7 +22,7 @@ public class Recipe {
     @Column(name = "number_of_servings", nullable = false)
     private Integer number_of_servings;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "recipe_fk")
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>(0);
 

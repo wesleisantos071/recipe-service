@@ -22,10 +22,11 @@ public class RecipeFilterController {
             response = List.class)
     public List<Recipe> listVegetarianRecipes(@RequestParam(required = false) Boolean isVegetarian,
                                               @RequestParam(required = false) Boolean isVegan,
+                                              @RequestParam(required = false) Integer numberOfServing,
                                               @RequestParam(required = false) String instructionKeyword,
                                               @RequestParam(required = false) List<String> includesIngredientNameList,
                                               @RequestParam(required = false) List<String> excludesIngredientNameList) {
-        return recipeService.filter(isVegetarian, isVegan, instructionKeyword, includesIngredientNameList, excludesIngredientNameList);
+        return recipeService.filter(isVegetarian, isVegan, numberOfServing, instructionKeyword, includesIngredientNameList, excludesIngredientNameList);
     }
 
     @PostMapping("/saveRecipe")

@@ -15,7 +15,7 @@ public class DataFixture {
         return recipe;
     }
 
-    RecipeIngredientDto generateRecipeIngredient(RecipeDto recipe, Double amount, String ingredientName, String unityOfMeasure) {
+    RecipeIngredientDto generateRecipeIngredient(RecipeDto recipe, Double amount, String unityOfMeasure, String ingredientName) {
         RecipeIngredientDto recipeIngredient = new RecipeIngredientDto();
         recipeIngredient.setAmount(amount);
         recipeIngredient.setIngredientName(ingredientName);
