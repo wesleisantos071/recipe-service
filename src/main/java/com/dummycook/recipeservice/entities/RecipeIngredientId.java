@@ -1,6 +1,10 @@
 package com.dummycook.recipeservice.entities;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
 @Embeddable
@@ -11,6 +15,7 @@ public class RecipeIngredientId implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "recipe_fk")
+    @JsonIgnore
     private Recipe recipe;
 
     public Recipe getRecipe() {

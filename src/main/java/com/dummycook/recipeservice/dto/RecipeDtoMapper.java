@@ -33,6 +33,7 @@ public class RecipeDtoMapper {
             recipeIngredient.setAmount(recipeIngredientDto.getAmount());
             recipeIngredient.setUnityOfMeasure(getUnityOfMeasureByName(recipeIngredientDto.getUnityOfMeasure()));
             RecipeIngredientId id = new RecipeIngredientId();
+            id.setRecipe(recipe);
             id.setIngredient(getIngredientByName(recipeIngredientDto.getIngredientName()));
             recipeIngredient.setRecipeIngredientId(id);
             recipe.getRecipeIngredients().add(recipeIngredient);

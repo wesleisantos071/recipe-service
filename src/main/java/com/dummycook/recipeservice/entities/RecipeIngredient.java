@@ -1,15 +1,12 @@
 package com.dummycook.recipeservice.entities;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Table(name = "recipe_ingredient")
 @Entity
 public class RecipeIngredient {
     @EmbeddedId
-    @JsonIgnore
     private RecipeIngredientId recipeIngredientId;
 
     @Column(name = "amount", nullable = false)
