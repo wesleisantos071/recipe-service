@@ -92,4 +92,8 @@ public class RecipeService {
     public Recipe findById(long id) {
         return recipeRepository.findById(id).get();
     }
+
+    public Recipe findByName(String name) {
+        return recipeRepository.findByName(name);
+    }
 }
