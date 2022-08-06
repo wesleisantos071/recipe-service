@@ -9,6 +9,9 @@ import java.io.Serializable;
 
 @Embeddable
 public class RecipeIngredientId implements Serializable {
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+
     @ManyToOne
     @JoinColumn(name = "ingredient_fk")
     private Ingredient ingredient;

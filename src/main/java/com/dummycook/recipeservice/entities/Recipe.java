@@ -1,12 +1,17 @@
 package com.dummycook.recipeservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "recipe")
 @Entity
-public class Recipe {
+public class Recipe implements Serializable {
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -23,7 +28,7 @@ public class Recipe {
     private Integer number_of_servings;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "recipe_fk")
+    @JoinColumn(name = "recipe_fk", updatable = false)
     private Set<RecipeIngredient> recipeIngredients = new HashSet<>(0);
 
     public Set<RecipeIngredient> getRecipeIngredients() {

@@ -15,11 +15,16 @@ import java.util.stream.Collectors;
 
 @Service
 public class RecipeService {
-    @Autowired
-    RecipeRepository recipeRepository;
 
     @Autowired
     RecipeDtoMapper recipeDtoMapper;
+
+    RecipeRepository recipeRepository;
+
+    @Autowired
+    public RecipeService(RecipeRepository recipeRepository) {
+        this.recipeRepository = recipeRepository;
+    }
 
     public List<Recipe> listAll() {
         return recipeRepository.findAll();
@@ -31,11 +36,11 @@ public class RecipeService {
                                String instructionKeywordFilter,
                                List<String> includesIngredientNameListFilter,
                                List<String> excludesIngredientNameListFilter) {
-        List<Recipe> allRecipes = recipeRepository.findAll();
+        List<Recipe> allRecipes = listAll();
         return allRecipes.stream()
                 .filter(recipe -> !recipe.getRecipeIngredients().isEmpty())
-                .filter(recipe -> isVegetarianFilter == null || areRecipeIngredientsVegetarian(recipe))
-                .filter(recipe -> isVeganFilter == null || areRecipeIngredientsVegan(recipe))
+                .filter(recipe -> isVegetarianFilter == null || (isVegetarianFilter ? areRecipeIngredientsVegetarian(recipe) : areRecipeIngredientsNonVegetarian(recipe)))
+                .filter(recipe -> isVeganFilter == null || (isVeganFilter ? areRecipeIngredientsVegan(recipe) : areRecipeIngredientsNonVegan(recipe)))
                 .filter(recipe -> numberOfServing == null || recipeMatchesNumberOfServing(recipe, numberOfServing))
                 .filter(recipe -> instructionKeywordFilter == null || recipeMatchesInstructionKeyWord(recipe, instructionKeywordFilter))
                 .filter(recipe -> includesIngredientNameListFilter == null || containsIngredients(recipe, includesIngredientNameListFilter))
@@ -43,27 +48,39 @@ public class RecipeService {
                 .collect(Collectors.toList());
     }
 
-    private boolean recipeMatchesInstructionKeyWord(Recipe recipe, String instructionKeywordFilter) {
+    public boolean recipeMatchesInstructionKeyWord(Recipe recipe, String instructionKeywordFilter) {
         return recipe.getInstructions().toLowerCase().contains(instructionKeywordFilter.toLowerCase());
     }
 
-    private boolean recipeMatchesNumberOfServing(Recipe recipe, Integer numberOfServing) {
+    public boolean recipeMatchesNumberOfServing(Recipe recipe, Integer numberOfServing) {
         return recipe.getNumber_of_servings().equals(numberOfServing);
     }
 
-    private boolean areRecipeIngredientsVegetarian(Recipe recipe) {
+    public boolean areRecipeIngredientsVegetarian(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
                 .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
     }
 
-    private boolean areRecipeIngredientsVegan(Recipe recipe) {
+    public boolean areRecipeIngredientsNonVegetarian(Recipe recipe) {
+        return recipe.getRecipeIngredients().stream()
+                .anyMatch(recipeIngredient -> recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
+    }
+
+    public boolean areRecipeIngredientsVegan(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
                 .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat()
                         && !recipeIngredient.getRecipeIngredientId().getIngredient().getIsAnimalOriginated()
                 );
     }
 
-    private boolean containsIngredients(Recipe recipe, List<String> includingIngredientNameList) {
+    public boolean areRecipeIngredientsNonVegan(Recipe recipe) {
+        return recipe.getRecipeIngredients().stream()
+                .anyMatch(recipeIngredient -> recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat()
+                        || recipeIngredient.getRecipeIngredientId().getIngredient().getIsAnimalOriginated()
+                );
+    }
+
+    public boolean containsIngredients(Recipe recipe, List<String> includingIngredientNameList) {
         return includingIngredientNameList == null || includingIngredientNameList.stream()
                 .allMatch(requiredIngredientName -> recipe.getRecipeIngredients().stream()
                         .anyMatch(recipeIngredient -> recipeIngredientHasName(recipeIngredient, requiredIngredientName)));
@@ -90,7 +107,29 @@ public class RecipeService {
         return recipe.orElse(null);
     }
 
+    @Transactional //postgress only allow db operations inside transactions when there is a lob involved
     public Recipe findByName(String name) {
         return recipeRepository.findByName(name);
+    }
+
+    @Transactional
+    public Recipe updateRecipe(RecipeDto recipeDto) {
+        Recipe recipeInDb = recipeRepository.findByName(recipeDto.getName());
+        if (recipeInDb == null) {
+            return null;
+        }
+        Recipe updatedRecipe = recipeDtoMapper.convertDtoToEntity(recipeDto);
+        updatedRecipe.setId(recipeInDb.getId());
+        return recipeRepository.save(updatedRecipe);
+    }
+
+    public Boolean deleteById(Long id) {
+        try {
+            recipeRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

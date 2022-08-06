@@ -1,10 +1,15 @@
 package com.dummycook.recipeservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "unity_of_measure")
 @Entity
-public class UnityOfMeasure {
+public class UnityOfMeasure implements Serializable {
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)

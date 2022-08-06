@@ -13,14 +13,18 @@ import java.util.Optional;
 @Service
 public class RecipeDtoMapper {
 
-    @Autowired
     IngredientRepository ingredientRepository;
 
-    @Autowired
     UnityOfMeasureRepository unityOfMeasureRepository;
 
-    @Autowired
     TypeOfUnityRepository typeOfUnityRepository;
+
+    @Autowired
+    public RecipeDtoMapper(IngredientRepository ingredientRepository, UnityOfMeasureRepository unityOfMeasureRepository, TypeOfUnityRepository typeOfUnityRepository) {
+        this.ingredientRepository = ingredientRepository;
+        this.unityOfMeasureRepository = unityOfMeasureRepository;
+        this.typeOfUnityRepository = typeOfUnityRepository;
+    }
 
     public Recipe convertDtoToEntity(RecipeDto recipeDto) {
         Recipe recipe = new Recipe();
@@ -41,7 +45,7 @@ public class RecipeDtoMapper {
         return recipe;
     }
 
-    private Ingredient getIngredientByName(String ingredientName) {
+    public Ingredient getIngredientByName(String ingredientName) {
         Optional<Ingredient> ingredientInDb = ingredientRepository.findByName(ingredientName);
         Ingredient ingredient;
         if (ingredientInDb.isPresent()) {
@@ -56,7 +60,7 @@ public class RecipeDtoMapper {
         return ingredient;
     }
 
-    private UnityOfMeasure getUnityOfMeasureByName(String unityOfMeasureName) {
+    public UnityOfMeasure getUnityOfMeasureByName(String unityOfMeasureName) {
         Optional<UnityOfMeasure> unityOfMeasureInDb = unityOfMeasureRepository.findByName(unityOfMeasureName);
         UnityOfMeasure unityOfMeasure;
         if (unityOfMeasureInDb.isPresent()) {
@@ -64,7 +68,7 @@ public class RecipeDtoMapper {
         } else {
             unityOfMeasure = new UnityOfMeasure();
             unityOfMeasure.setName(unityOfMeasureName);
-            unityOfMeasure.setTypeOfUnity(typeOfUnityRepository.getReferenceById(0l));//set the default id of unknown type of unity
+            unityOfMeasure.setTypeOfUnity(typeOfUnityRepository.findById(0l).orElse(null));//set the default id of unknown type of unity
             unityOfMeasure = unityOfMeasureRepository.save(unityOfMeasure);
         }
         return unityOfMeasure;

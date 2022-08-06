@@ -1,11 +1,17 @@
 package com.dummycook.recipeservice.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Table(name = "recipe_ingredient")
 @Entity
-public class RecipeIngredient {
+public class RecipeIngredient implements Serializable {
+    @JsonIgnore
+    private static final long serialVersionUID = 1L;
+    
     @EmbeddedId
     private RecipeIngredientId recipeIngredientId;
 
