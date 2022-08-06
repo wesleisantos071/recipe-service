@@ -1,5 +1,6 @@
 package com.dummycook.recipeservice.services;
 
+import com.dummycook.recipeservice.controllers.RecipeFilterController;
 import com.dummycook.recipeservice.dto.RecipeDto;
 import com.dummycook.recipeservice.dto.RecipeIngredientDto;
 import com.dummycook.recipeservice.entities.Recipe;
@@ -18,7 +19,7 @@ import java.util.Set;
 class RecipeServiceTestIT {
 
     @Autowired
-    RecipeService recipeService;
+    private RecipeFilterController controller;
 
     @Autowired
     DataFixture fixture;
@@ -42,7 +43,7 @@ class RecipeServiceTestIT {
     }
 
     private Recipe getOrCreateRecipe(String name) {
-        Recipe recipe = recipeService.findByName(name);
+        Recipe recipe = controller.findByName(name);
         if (recipe != null) {
             return recipe;
         }
@@ -57,7 +58,7 @@ class RecipeServiceTestIT {
             ingredientSet.add(fixture.generateRecipeIngredient(recipeSpaghettiDto, 10.0, "g", "Garlic"));
             ingredientSet.add(fixture.generateRecipeIngredient(recipeSpaghettiDto, 10.0, "g", "Crushed red pepper flakes"));
             recipeSpaghettiDto.setRecipeIngredients(ingredientSet);
-            return recipeService.saveRecipe(recipeSpaghettiDto);
+            return controller.saveRecipe(recipeSpaghettiDto);
         }
         if (SALMON_TITLE.equals(name)) {
             RecipeDto recipeSalmonDto = fixture.generateRecipe("SALMON FAJITAS"
@@ -78,7 +79,7 @@ class RecipeServiceTestIT {
             ingredientSet2.add(fixture.generateRecipeIngredient(recipeSalmonDto, 1.0, "Tbsp", "Lime Juice"));
             ingredientSet2.add(fixture.generateRecipeIngredient(recipeSalmonDto, 250.0, "g", "warm tortillas"));
             recipeSalmonDto.setRecipeIngredients(ingredientSet2);
-            return recipeService.saveRecipe(recipeSalmonDto);
+            return controller.saveRecipe(recipeSalmonDto);
         }
         if (BRUSCHETTA_TITLE.equals(name)) {
             RecipeDto recipeBruschettaDto = fixture.generateRecipe("BRUSCHETTA"
@@ -95,7 +96,7 @@ class RecipeServiceTestIT {
             ingredientSet3.add(fixture.generateRecipeIngredient(recipeBruschettaDto, 2.0, "cloves", "garlic"));
             ingredientSet3.add(fixture.generateRecipeIngredient(recipeBruschettaDto, 100.0, "g", "mozzarella cheese"));
             recipeBruschettaDto.setRecipeIngredients(ingredientSet3);
-            return recipeService.saveRecipe(recipeBruschettaDto);
+            return controller.saveRecipe(recipeBruschettaDto);
         }
         return null;
     }
@@ -103,7 +104,7 @@ class RecipeServiceTestIT {
     //generate a recipe vegetarian and check if the search can find it
     @Test
     void givenVegetarianRecipeSaved_then_FindItOnVegetarianRecipes() {
-        List<Recipe> resultingRecipes = recipeService.filter(true, null, null, null, null, null);
+        List<Recipe> resultingRecipes = controller.search(true, null, null, null, null, null);
         Assertions.assertThat(resultingRecipes.size()).isSameAs(2);
         Assertions.assertThat(resultingRecipes.stream().allMatch(recipe -> recipe.getId() == spaghetti.getId()
                 || recipe.getId() == bruschetta.getId())).isTrue();
@@ -112,7 +113,7 @@ class RecipeServiceTestIT {
     //generate a recipe with a number of servings, and check if the search can find it by number of servings
     @Test
     void givenRecipeSaved_then_FindItByNumberOfServings() {
-        List<Recipe> resultingRecipes = recipeService.filter(null, null, 4, null, null, null);
+        List<Recipe> resultingRecipes = controller.search(null, null, 4, null, null, null);
         Assertions.assertThat(resultingRecipes.size()).isSameAs(1);
         Assertions.assertThat(resultingRecipes.get(0).getId()).isSameAs(salmon.getId());
     }
@@ -122,7 +123,7 @@ class RecipeServiceTestIT {
     void givenRecipeSaved_then_FindItByIncludedIngredients() {
         List<String> includesIngredientNameList = new ArrayList<>();
         includesIngredientNameList.add("Salmon");
-        List<Recipe> resultingRecipes = recipeService.filter(null,
+        List<Recipe> resultingRecipes = controller.search(null,
                 null,
                 null,
                 null,
@@ -137,7 +138,7 @@ class RecipeServiceTestIT {
     void givenRecipeSaved_then_FindItByExcludedIngredients() {
         List<String> excludesIngredientNameList = new ArrayList<>();
         excludesIngredientNameList.add("Salmon");
-        List<Recipe> resultingRecipes = recipeService.filter(null,
+        List<Recipe> resultingRecipes = controller.search(null,
                 null,
                 null,
                 null,
@@ -152,7 +153,7 @@ class RecipeServiceTestIT {
     @Test
     void givenRecipeSaved_then_FindItByInstructionsContainingKeywords() {
         String instructionKeyWord = "crispy";
-        List<Recipe> resultingRecipes = recipeService.filter(null,
+        List<Recipe> resultingRecipes = controller.search(null,
                 null,
                 null,
                 instructionKeyWord,
@@ -168,7 +169,7 @@ class RecipeServiceTestIT {
     void givenRecipeSaved_then_FindItBasedOnNumberOfServingsAndIncludedIngredients() {
         List<String> includesIngredientNameList = new ArrayList<>();
         includesIngredientNameList.add("Salmon");
-        List<Recipe> resultingRecipes = recipeService.filter(null,
+        List<Recipe> resultingRecipes = controller.search(null,
                 null,
                 4,
                 null,
@@ -187,8 +188,8 @@ class RecipeServiceTestIT {
     void givenRecipeSaved_then_FindItBasedOnMultipleCriteria() {
         List<String> excludesIngredientNameList = new ArrayList<>();
         excludesIngredientNameList.add("Salmon");
-        String instructionKeyword = "oven";
-        List<Recipe> resultingRecipes = recipeService.filter(null,
+        String instructionKeyword = "crispy";
+        List<Recipe> resultingRecipes = controller.search(null,
                 null,
                 null,
                 instructionKeyword,
