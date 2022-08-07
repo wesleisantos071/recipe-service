@@ -10,10 +10,10 @@ Sample application to handle recipes
   folder json_samples of this project
 
 ## Pre-requisites
-
 - Docker installed and able to access a docker repo to get the images adoptopenjdk:8-jre-hotspot and postgres:
   13.1-alpine
-- Alternatively, it is also possible to use a local Postgres database following the specifications below
+- If docker is not an option for you, it is also possible to use a local Postgres database following the specifications
+  below
 
   ```sh
   instance name: dummycookdb
@@ -42,7 +42,7 @@ Sample application to handle recipes
     docker compose up
     ```
 
-- ### Step 1b - Using local Postgres Server
+- ### Step 1b - Using local Postgres Server (optional in case docker is not possible)
   #### Inside the root folder of this project, use the command:
   ```sh
   .\mvnw.cmd spring-boot:run
