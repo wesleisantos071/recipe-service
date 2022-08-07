@@ -65,7 +65,8 @@ After considering the requirements
   ```
 
 The relational model was created (check file "ER_Diagram.png", on root folder for more details). The design of this
-model allowed accommodating all the data needed to fulfill the requirements
+model allowed accommodating all the data needed to fulfill the requirements:
+[![N|Solid](https://raw.githubusercontent.com/wesleisantos071/recipe-service/main/ER_Diagram.png)]
 
 #### The tech stack below was selected based on the skill of the programmer, and ease of finding good documentation/community support
 
