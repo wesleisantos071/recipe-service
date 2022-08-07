@@ -1,0 +1,52 @@
+{
+  "instructions": "Prep the tomato topping. Stir together the diced tomatoes, basil, red onion, olive oil and a pinch of salt together in a mixing bowl until evenly combined. Cover and refrigerate for at least 15 minutes or up to 24 hours.\\n Toast the bread. Heat oven to 400°F. Arrange the bread slices on a large baking sheet in an even layer. If you would like, brush the bread lightly with olive oil (or you can skip this step). Bake for 7 to 10 minutes — keeping a close eye on the bread so that it doesn’t over bake — until it is toasted and crispy. Transfer baking sheet to a wire cooling rack.\\n Add garlic. Slice off the ends of the garlic cloves (without removing the papery skins). Then rub the cut end of the garlic evenly over the tops of the bread slices to add as much or as little garlic flavor as you prefer, to taste.\\n Assemble. Taste the tomato topping and season with additional salt (and black pepper, if you’d like) to taste. Sprinkle the grated mozzarella on the top. Add a spoonful of the tomato topping mixture to each slice of bread, then drizzle a hint of olive oil over the tomato topping.\\n Serve. Serve immediately and enjoy!",
+  "name": "BRUSCHETTA",
+  "number_of_servings": 16,
+  "recipeIngredients": [
+    {
+      "amount": 1.0,
+      "unityOfMeasure": "kg",
+      "ingredientName": "diced tomato"
+    },
+    {
+      "amount": 0.5,
+      "unityOfMeasure": "cup",
+      "ingredientName": "chopped basil leaves"
+    },
+    {
+      "amount": 0.3,
+      "unityOfMeasure": "cup",
+      "ingredientName": "Diced red onion"
+    },
+    {
+      "amount": 2.0,
+      "unityOfMeasure": "tbsp",
+      "ingredientName": "Olive oil"
+    },
+    {
+      "amount": 10.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "Salt"
+    },
+    {
+      "amount": 10.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "Black Pepper"
+    },
+    {
+      "amount": 25.0,
+      "unityOfMeasure": "cm",
+      "ingredientName": "large baguette"
+    },
+    {
+      "amount": 2.0,
+      "unityOfMeasure": "cloves",
+      "ingredientName": "garlic"
+    },
+    {
+      "amount": 100.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "mozzarella cheese"
+    }
+  ]
+}

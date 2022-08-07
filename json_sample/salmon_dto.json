@@ -1,0 +1,72 @@
+{
+  "instructions": "In a large bowl or Ziplock bag, combine marinade ingredients. Add the salmon, and toss in the marinade until evenly coated. Cover or seal, and refrigerate for at least 30 minutes, or up to 5 hours.\n Heat 1 tablespoon olive oil in a large skillet over medium-high heat. Add peppers, onion and jalapeno and saute for 5-6 minutes, stirring occasionally, until the onions are soft and the vegetables all begin to slightly brown on the edges. Add the lime juice and saute for an additional minute, then remove from heat.\n Meanwhile, in a separate skillet, heat 1 tablespoon olive oil over medium-high heat. Add salmon and marinade, and saute for 3-4 minutes, breaking up the salmon occasionally as it cooks with a spoon or spatula. When the edges begin to look slightly crispy and browned, remove from    heat.\n Assemble the fajitas bylayering warm tortillas with the salmon, vegetable mixture and desired toppings.",
+  "name": "SALMON FAJITAS",
+  "number_of_servings": 4,
+  "recipeIngredients": [
+    {
+      "amount": 2.0,
+      "unityOfMeasure": "Tbsp",
+      "ingredientName": "fresh lime juice"
+    },
+    {
+      "amount": 2.0,
+      "unityOfMeasure": "cloves",
+      "ingredientName": "Minced Garlic "
+    },
+    {
+      "amount": 1.0,
+      "unityOfMeasure": "tsp",
+      "ingredientName": "Chipotle Powder"
+    },
+    {
+      "amount": 0.5,
+      "unityOfMeasure": "tsp",
+      "ingredientName": "Cumin"
+    },
+    {
+      "amount": 0.25,
+      "unityOfMeasure": "tsp",
+      "ingredientName": "Salt"
+    },
+    {
+      "amount": 0.25,
+      "unityOfMeasure": "tsp",
+      "ingredientName": "black pepper"
+    },
+    {
+      "amount": 1.0,
+      "unityOfMeasure": "kg",
+      "ingredientName": "Salmon"
+    },
+    {
+      "amount": 2.0,
+      "unityOfMeasure": "Tbsp",
+      "ingredientName": "olive oil"
+    },
+    {
+      "amount": 20.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "Sliced Red Peppers"
+    },
+    {
+      "amount": 50.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "Sliced Red Onion"
+    },
+    {
+      "amount": 50.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "Diced jalapeno"
+    },
+    {
+      "amount": 1.0,
+      "unityOfMeasure": "Tbsp",
+      "ingredientName": "Lime Juice"
+    },
+    {
+      "amount": 250.0,
+      "unityOfMeasure": "g",
+      "ingredientName": "warm tortillas"
+    }
+  ]
+}
