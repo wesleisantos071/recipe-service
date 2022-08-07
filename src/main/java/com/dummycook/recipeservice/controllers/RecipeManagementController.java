@@ -3,6 +3,7 @@ package com.dummycook.recipeservice.controllers;
 import com.dummycook.recipeservice.dto.RecipeDto;
 import com.dummycook.recipeservice.entities.Recipe;
 import com.dummycook.recipeservice.services.RecipeService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -15,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Slf4j
+@Api(tags = "RecipeManagement")
 @RestController
 @RequestMapping("/api/RecipeManagement")
 public class RecipeManagementController {
@@ -70,6 +72,8 @@ public class RecipeManagementController {
         return recipeService.updateRecipe(recipeDto);
     }
 
+
+    //Exception Handling
     @ExceptionHandler(value = {ConstraintViolationException.class})
     public ResponseEntity<String> handlePreconditionFailed(ConstraintViolationException exception) {
         log.error("Db error: ConstraintViolation", exception);
