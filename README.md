@@ -73,7 +73,7 @@ model allowed accommodating all the data needed to fulfill the requirements:
 - Relation Database: Postgres (runtime), H2(test)
 - Java 1.8: Runtime language
 - Maven: build tool
-- SpringBoot: Java framework to provide a large toolset
+- SpringBoot: Java framework to provide a large toolset, such as REST endpoints and application server
 - Hibernate: JPA Implementation
 - Lombok: Boilerplate code reduction framework, basically used for Dtos
 - JUnit: Test framework
