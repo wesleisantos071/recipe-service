@@ -8,6 +8,7 @@ import com.dummycook.recipeservice.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -116,7 +117,7 @@ public class RecipeService {
     public Recipe updateRecipe(RecipeDto recipeDto) {
         Recipe recipeInDb = recipeRepository.findByName(recipeDto.getName());
         if (recipeInDb == null) {
-            return null;
+            throw new EntityNotFoundException(String.format("Entity %s", recipeDto.getName()));
         }
         Recipe updatedRecipe = recipeDtoMapper.convertDtoToEntity(recipeDto);
         updatedRecipe.setId(recipeInDb.getId());
