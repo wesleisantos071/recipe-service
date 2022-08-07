@@ -79,7 +79,8 @@ model allowed accommodating all the data needed to fulfill the requirements:
 - JUnit: Test framework
 - SpringFox: Swagger implementation for Spring
 - Spring Data Rest: Framework to expose Repositories as REST endpoints
-- Flyway: DB Migration tool, to secure correct state of DB during app startup
+- Flyway: DB Migration tool, to secure correct state of DB during app startup (tables are exactly as expected, and has
+  the initial set of data e.g: ingredients and unity of measure)
 - Docker: Tool used to provide the app as a self-contained service
 - Intellij: IDE used to code the whole app
 - SonarLint: Plugin on Intellij to enable code quality analysis
