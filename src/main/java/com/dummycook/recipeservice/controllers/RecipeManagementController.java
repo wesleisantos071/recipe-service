@@ -6,13 +6,9 @@ import com.dummycook.recipeservice.services.RecipeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @Slf4j
@@ -54,39 +50,21 @@ public class RecipeManagementController {
     }
 
     @GetMapping("/findByName")
-    public Recipe findByName(@RequestParam(required = true) String recipeName) {
+    public Recipe findByName(String recipeName) {
         return recipeService.findByName(recipeName);
     }
 
     @DeleteMapping("/deleteById")
-    public Boolean deleteById(@RequestParam(required = true) Long id) {
+    public Boolean deleteById(Long id) {
         return recipeService.deleteById(id);
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     @ApiOperation(value = "Update an existing recipe",
             notes = "Update a recipe based on the RecipeDto object provided" +
                     "\nImportant: the name of the recipe cannot be changed",
             response = List.class)
-    public Recipe updateRecipe(@RequestBody RecipeDto recipeDto) {
-        return recipeService.updateRecipe(recipeDto);
-    }
-
-
-    //Exception Handling
-    @ExceptionHandler(value = {ConstraintViolationException.class})
-    public ResponseEntity<String> handlePreconditionFailed(ConstraintViolationException exception) {
-        log.error("Db error: ConstraintViolation", exception);
-        return new ResponseEntity<>(
-                "Constraint violation exception: " + exception.getConstraintName(),
-                HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(value = {EntityNotFoundException.class})
-    public ResponseEntity<String> handlePreconditionFailed(EntityNotFoundException exception) {
-        log.error("Db error: EntityNotFound", exception);
-        return new ResponseEntity<>(
-                "Entity not found exception: " + exception.getMessage(),
-                HttpStatus.BAD_REQUEST);
+    public void updateRecipe(@RequestParam long id, @RequestBody RecipeDto recipeDto) {
+        recipeService.updateRecipe(id, recipeDto);
     }
 }

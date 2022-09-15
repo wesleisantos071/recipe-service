@@ -59,7 +59,7 @@ public class RecipeService {
 
     public boolean areRecipeIngredientsVegetarian(Recipe recipe) {
         return recipe.getRecipeIngredients().stream()
-                .allMatch(recipeIngredient -> !recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
+                .noneMatch(recipeIngredient -> recipeIngredient.getRecipeIngredientId().getIngredient().getIsMeat());
     }
 
     public boolean areRecipeIngredientsNonVegetarian(Recipe recipe) {
@@ -114,14 +114,14 @@ public class RecipeService {
     }
 
     @Transactional
-    public Recipe updateRecipe(RecipeDto recipeDto) {
-        Recipe recipeInDb = recipeRepository.findByName(recipeDto.getName());
-        if (recipeInDb == null) {
+    public void updateRecipe(long id, RecipeDto recipeDto) {
+        Optional<Recipe> recipeOptional = recipeRepository.findById(id);
+        if (!recipeOptional.isPresent()) {
             throw new EntityNotFoundException(String.format("Entity %s", recipeDto.getName()));
         }
         Recipe updatedRecipe = recipeDtoMapper.convertDtoToEntity(recipeDto);
-        updatedRecipe.setId(recipeInDb.getId());
-        return recipeRepository.save(updatedRecipe);
+        updatedRecipe.setId(id);
+        recipeRepository.save(updatedRecipe);
     }
 
     public Boolean deleteById(Long id) {
