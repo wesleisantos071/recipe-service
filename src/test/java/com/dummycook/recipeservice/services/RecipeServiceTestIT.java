@@ -3,6 +3,7 @@ package com.dummycook.recipeservice.services;
 import com.dummycook.recipeservice.controllers.RecipeManagementController;
 import com.dummycook.recipeservice.dto.RecipeDto;
 import com.dummycook.recipeservice.entities.Recipe;
+import com.dummycook.recipeservice.fixture.RecipeDtoFixture;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class RecipeServiceTestIT {
     private RecipeManagementController controller;
 
     @Autowired
-    DataFixture fixture;
+    RecipeDtoFixture fixture;
 
     Recipe spaghetti;
     Recipe salmon;

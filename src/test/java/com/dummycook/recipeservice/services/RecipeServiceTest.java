@@ -3,6 +3,7 @@ package com.dummycook.recipeservice.services;
 import com.dummycook.recipeservice.dto.RecipeDto;
 import com.dummycook.recipeservice.dto.RecipeDtoMapper;
 import com.dummycook.recipeservice.entities.Recipe;
+import com.dummycook.recipeservice.fixture.RecipeDtoFixture;
 import com.dummycook.recipeservice.repositories.IngredientRepository;
 import com.dummycook.recipeservice.repositories.RecipeRepository;
 import com.dummycook.recipeservice.repositories.TypeOfUnityRepository;
@@ -67,20 +68,20 @@ class RecipeServiceTest {
     }
 
     private Recipe createRecipe(RecipeName name) {
-        DataFixture fixture = new DataFixture();
+        RecipeDtoFixture fixture = new RecipeDtoFixture();
         switch (name) {
             case SPAGHETTI:
                 RecipeDto recipeDto = fixture.generateRecipe(RecipeName.SPAGHETTI);
                 return recipeDtoMapper.convertDtoToEntity(recipeDto);
             case SALMON:
                 Recipe salmonRecipe = recipeDtoMapper.convertDtoToEntity(fixture.generateRecipe(RecipeName.SALMON));
-                fixture.processIsMeatIngredients(salmonRecipe.getRecipeIngredients());
-                fixture.processIsAnimalOriginatedIngredients(salmonRecipe.getRecipeIngredients());
+//                fixture.processIsMeatIngredients(salmonRecipe.getRecipeIngredients());
+//                fixture.processIsAnimalOriginatedIngredients(salmonRecipe.getRecipeIngredients());
                 return salmonRecipe;
             case BRUSCHETTA:
                 Recipe bruschettaRecipe = recipeDtoMapper.convertDtoToEntity(fixture.generateRecipe(RecipeName.BRUSCHETTA));
-                fixture.processIsMeatIngredients(bruschettaRecipe.getRecipeIngredients());
-                fixture.processIsAnimalOriginatedIngredients(bruschettaRecipe.getRecipeIngredients());
+//                fixture.processIsMeatIngredients(bruschettaRecipe.getRecipeIngredients());
+//                fixture.processIsAnimalOriginatedIngredients(bruschettaRecipe.getRecipeIngredients());
                 return bruschettaRecipe;
         }
         return null;

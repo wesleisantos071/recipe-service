@@ -1,17 +1,18 @@
-package com.dummycook.recipeservice.services;
+package com.dummycook.recipeservice.fixture;
 
 import com.dummycook.recipeservice.dto.RecipeDto;
 import com.dummycook.recipeservice.dto.RecipeIngredientDto;
 import com.dummycook.recipeservice.entities.RecipeIngredient;
+import com.dummycook.recipeservice.services.RecipeName;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
-public class DataFixture {
+public class RecipeDtoFixture {
 
-    RecipeDto generateRecipe(RecipeName name) {
+    public RecipeDto generateRecipe(RecipeName name) {
         RecipeDto recipe = new RecipeDto();
         String recipeName = null;
         String instructions = null;
@@ -94,6 +95,3 @@ public class DataFixture {
     }
 }
 
-enum RecipeName {
-    SPAGHETTI, SALMON, BRUSCHETTA
-}
